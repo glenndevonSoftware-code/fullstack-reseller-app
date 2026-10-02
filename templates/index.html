@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reseller Inventory Manager</title>
+</head>
+
+<body>
+    <h1>Reseller Inventory Manager</h1>
+
+    <p>Track inventory, sales, expenses, and profit.</p>
+
+    <h2>Add Inventory Item</h2>
+
+<form action="/add-item" method="POST">
+    <label for="item_name">Item Name:</label>
+    <input type="text" id="item_name" name="item_name">
+
+    <br><br>
+
+    <label for="purchase_price">Purchase Price:</label>
+    <input type="number"
+           id="purchase_price"
+           name="purchase_price"
+           step="0.01">
+
+    <br><br>
+
+    <label for="listing_price">Listing Price:</label>
+    <input type="number"
+           id="listing_price"
+           name="listing_price"
+           step="0.01">
+
+    <br><br>
+
+    <button type="submit">Add Item</button>
+</form>
+
+<h2>Inventory</h2>
+
+{% if items %}
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Item</th>
+        <th>Purchase Price</th>
+        <th>Listing Price</th>
+    </tr>
+
+    {% for item in items %}
+    <tr>
+        <td>{{ item["id"] }}</td>
+        <td>{{ item["item_name"] }}</td>
+        <td>${{ "%.2f"|format(item["purchase_price"]) }}</td>
+        <td>${{ "%.2f"|format(item["listing_price"]) }}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+{% else %}
+
+<p>No inventory has been added yet.</p>
+
+{% endif %}
+
+</body>
+</html>
