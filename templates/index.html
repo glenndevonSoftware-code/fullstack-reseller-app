@@ -48,6 +48,7 @@
         <th>Item</th>
         <th>Purchase Price</th>
         <th>Listing Price</th>
+        <th>Potential Profit</th>
     </tr>
 
     {% for item in items %}
@@ -56,6 +57,7 @@
         <td>{{ item["item_name"] }}</td>
         <td>${{ "%.2f"|format(item["purchase_price"]) }}</td>
         <td>${{ "%.2f"|format(item["listing_price"]) }}</td>
+        <td>${{ "%.2f"|format(item["listing_price"] - item["purchase_price"]) }}</td>
     </tr>
     {% endfor %}
 
