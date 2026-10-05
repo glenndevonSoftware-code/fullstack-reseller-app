@@ -52,6 +52,20 @@ def add_item():
 
     return redirect(url_for("home"))
 
+@app.route("/delete-item/<int:item_id>", methods=["POST"])
+def delete_item(item_id):
+    conn = sqlite3.connect("inventory.db")
+
+    conn.execute(
+        "DELETE FROM inventory WHERE id = ?",
+        (item_id,)
+    )
+
+    conn.commit()
+    conn.close()
+
+    return redirect(url_for("home"))
+
 if __name__ == "__main__":
     init_db()
     app.run(debug=True)

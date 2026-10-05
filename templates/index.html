@@ -49,6 +49,7 @@
         <th>Purchase Price</th>
         <th>Listing Price</th>
         <th>Potential Profit</th>
+        <th>Actions</th>
     </tr>
 
     {% for item in items %}
@@ -58,6 +59,11 @@
         <td>${{ "%.2f"|format(item["purchase_price"]) }}</td>
         <td>${{ "%.2f"|format(item["listing_price"]) }}</td>
         <td>${{ "%.2f"|format(item["listing_price"] - item["purchase_price"]) }}</td>
+        <td>
+    <form action="{{ url_for('delete_item', item_id=item['id']) }}" method="POST">
+        <button type="submit">Delete</button>
+    </form>
+</td>
     </tr>
     {% endfor %}
 
